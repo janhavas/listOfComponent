@@ -21,7 +21,7 @@ public class ApplicationController {
 
    @GetMapping
     public List<OrderWithComponent> getAllOrdersWithCompo() {
-      // applicationServices.linkOrderWithComponents();
+      //applicationServices.linkOrderWithComponents();
        return applicationServices.selectAllOrdersWithComponents();
     }
 

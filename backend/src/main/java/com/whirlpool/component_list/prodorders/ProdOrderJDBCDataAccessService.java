@@ -22,7 +22,7 @@ public class ProdOrderJDBCDataAccessService implements ProdOrderDao {
 
     private static final String SP_GET_ORDER_BY_CRITERIA = "{call CellAdpt.dbo.StoredGetOrdersByCriteria(?, ?, ?, ?, ?)}";
 
-    public ProdOrderJDBCDataAccessService(@Qualifier("miiJdbc") JdbcTemplate jdbcTemplate, ProdOrderRowMapper prodOrderRowMapper) {
+    public ProdOrderJDBCDataAccessService(JdbcTemplate jdbcTemplate, ProdOrderRowMapper prodOrderRowMapper) {
         this.jdbcTemplate = jdbcTemplate;
         this.prodOrderRowMapper = prodOrderRowMapper;
     }

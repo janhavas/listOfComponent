@@ -134,10 +134,10 @@ function App() {
                             <div style={{ display: "none" }}>
                                 <GeneratePrintTable selectedOrders={selectedRows} ref={componentRef} />
                             </div>
-                            <Button onClick={ fetchOrdersWithCompo } colorScheme='messenger' marginRight={'10px'}>Domov</Button>
-                            <Button onClick={ handlePrintSelect } colorScheme='green' marginLeft={'10px'}>Tlačiť vybrané položky</Button>
+                            {/*<Button onClick={ fetchOrdersWithCompo } colorScheme='messenger' marginRight={'10px'}>Domov</Button>*/}
+                            <Button onClick={ handlePrintSelect } colorScheme='green' marginLeft={'10px'}>Tlačiť vybrané</Button>
                             <Button onClick={ handlePrintAll } colorScheme='green' marginLeft={'10px'}>Tlačiť všetko</Button>
-                            <Button onClick={ fetchOrdersFromCodCell } colorScheme='messenger' marginLeft={'10px'}>Objednávky Tracking stanica</Button>
+                            {/*<Button onClick={ fetchOrdersFromCodCell } colorScheme='messenger' marginLeft={'10px'}>Objednávky Tracking stanica</Button>*/}
                         </div>
                     </Box>
             </Container>
