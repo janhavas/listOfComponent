@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {
     Box,
     Button, ButtonGroup,
-    Center, Checkbox, Container,
+    Center, Checkbox, Container, CSSReset,
     Flex, Heading, Highlight, HStack, IconButton,
     SimpleGrid, Spacer,
     Spinner, Stack,
@@ -15,9 +15,10 @@ import {
     Thead,
     Tr, VStack
 } from "@chakra-ui/react";
-import {getAllOrdersWithCompo, getAllOrdersFromCodCell} from "./services/order.js";
+import {getAllOrdersWithCompo, getAllOrdersFromCodCell, getAllOrdersWithCompoCodNext} from "./services/order.js";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import GeneratePrintTable from "./components/GeneratePrintTable.jsx";
+import {Global} from "@emotion/react";
 
 
 
@@ -38,6 +39,20 @@ function App() {
     const fetchOrdersWithCompo = () => {
         setLoading(true);
         getAllOrdersWithCompo().then(res => {
+            setOrderscompo(res.data)
+            console.log("Default data: " + JSON.stringify(res))
+            console.log("Received components:", JSON.stringify(res.components))
+        }).catch(err => {
+            console.log(err)
+        }).finally(() => {
+            setLoading(false)
+        })
+    }
+
+    const fetchOrdersWithCompoCodNext = () => {
+        setLoading(true);
+        getAllOrdersWithCompoCodNext().then(res => {
+            setOrderscompo([]);
             setOrderscompo(res.data)
             console.log("Default data: " + JSON.stringify(res))
             console.log("Received components:", JSON.stringify(res.components))
@@ -77,7 +92,7 @@ function App() {
 
     useEffect(() => {
         fetchOrdersWithCompo();
-
+        fetchOrdersWithCompoCodNext();
     }, []);
 
 
@@ -134,11 +149,13 @@ function App() {
                             <div style={{ display: "none" }}>
                                 <GeneratePrintTable selectedOrders={selectedRows} ref={componentRef} />
                             </div>
-                            {/*<Button onClick={ fetchOrdersWithCompo } colorScheme='messenger' marginRight={'10px'}>Domov</Button>*/}
+                            <Button onClick={ fetchOrdersWithCompo } colorScheme='green' marginRight={'10px'}>Domov</Button>
                             <Button onClick={ handlePrintSelect } colorScheme='green' marginLeft={'10px'}>Tlačiť vybrané</Button>
                             <Button onClick={ handlePrintAll } colorScheme='green' marginLeft={'10px'}>Tlačiť všetko</Button>
                             {/*<Button onClick={ fetchOrdersFromCodCell } colorScheme='messenger' marginLeft={'10px'}>Objednávky Tracking stanica</Button>*/}
+                            <Button onClick={ fetchOrdersWithCompoCodNext } colorScheme='red' marginLeft={'10px'}>Zajtra</Button>
                         </div>
+
                     </Box>
             </Container>
 
@@ -146,19 +163,20 @@ function App() {
             <Flex alignItems="center" justifyContent="center">
             <TableContainer >
 
-                <Table ref={componentRefAll} size={"sm"}  variant="simple" style={{ borderSpacing: '0 4px', border: '2px solid green' }}>
+                <Table ref={componentRefAll} size={"sx"}  variant="simple" style={{ borderSpacing: '0 4px', border: '2px solid green' }}>
                     <TableCaption placement={"top"}>Testovacia verzia stránky. Zvážte informácie tu uvedené.</TableCaption>
                     <Thead>
                         <Tr>
-                            <Th minW="90px" maxW="100px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Výber pre tlač</Th>
+                            <Th minW="60px" maxW="80px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Výber tlače</Th>
                             {/*<Th >Line ID</Th>*/}
                             <Th>Číslo objednávky</Th>
-                            <Th>Číslo výrobku</Th>
-                            <Th minW="65px" maxW="65px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Alt Bom</Th>
+                            <Th minW="110px" maxW="110px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Číslo výrobku</Th>
+                            <Th minW="45px" maxW="65px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Alt Bom</Th>
+                            <Th minW="65px" maxW="65px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Počet</Th>
                             {/*                        <Th>Individual FG Number</Th>
                         <Th>Individual FG Description</Th>*/}
-                            <Th>Dátum výroby</Th>
-                            <Th minW="90px" maxW="100px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Počet</Th>
+                            <Th>Technický popis</Th>
+                            <Th minW="160px" maxW="160px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Dátum výroby</Th>
                             <Th>Materiál</Th>
                             <Th>Popis materiálu</Th>
                             <Th minW="80px" maxW="80px" style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>Family Code</Th>
@@ -180,9 +198,15 @@ function App() {
                                                         {
                                                             id: order.id,
                                                             ordNum: order.ordNum,
-                                                            indFgNum: order.indFgNum,
+                                                            fgNum: order.fgNum,
+                                                            altBom: order.altBom,
+                                                            ordQty: order.ordQty,
+                                                            indFgDesc: order.indFgDesc,
+                                                            schedDate: order.schedDate,
                                                             components: order.components.map((component) => ({
                                                                 matNum: component.matNum,
+                                                                matNumDesc: component.matNumDesc,
+                                                                famCode: component.famCode,
                                                                 startDate: component.startDate,
                                                                 endDate: component.endDate
                                                             }))
@@ -198,10 +222,12 @@ function App() {
                                     <Td fontSize={25} rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.ordNum}</b></Td>
                                     <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.fgNum}</Td>
                                     <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.altBom}</Td>
+                                    <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.ordQty}</b></Td>
                                     {/*                                <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.indFgNum}</Td>
                                 <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.indFgDesc}</Td>*/}
+                                    <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.indFgDesc}</b></Td>
                                     <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.schedDate}</Td>
-                                    <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.ordQty}</Td>
+
 
                                 </Tr>
                                 {order.components.map((component, index) => (
@@ -221,6 +247,8 @@ function App() {
             </TableContainer>
 
             </Flex>
+
+
         </>
     )
 }

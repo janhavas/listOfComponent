@@ -11,6 +11,15 @@ export const getAllOrdersWithCompo = async () =>{
     }
 }
 
+export const getAllOrdersWithCompoCodNext = async () =>{
+
+    try{
+        return await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/get-orders-with-components/cod-next`)
+    } catch (e){
+        throw e;
+    }
+}
+
 export const getAllOrdersFromCodCell = async () =>{
 
     try {
