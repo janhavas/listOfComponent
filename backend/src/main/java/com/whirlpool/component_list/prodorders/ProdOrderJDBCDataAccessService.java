@@ -31,7 +31,8 @@ public class ProdOrderJDBCDataAccessService implements ProdOrderDao {
     @Override
     public List<ProdOrder> selectAllProdOrders() {
         String startDate = LocalDate.now().toString();
-        String endDate = LocalDate.now().plusDays(1).toString();
+        String endDate = LocalDate.now().plusDays(2).toString();
+
 
         return jdbcTemplate.query(connection -> {
             CallableStatement callableStatement = connection.prepareCall(SP_GET_ORDER_BY_CRITERIA);

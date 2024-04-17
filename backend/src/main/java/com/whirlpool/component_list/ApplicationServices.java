@@ -72,8 +72,27 @@ public class ApplicationServices {
 
     public List<OrderWithComponent> selectAllOrdersWithComponents(){
         LocalDate date = LocalDate.now();
+        LocalDate to = LocalDate.now().plusDays(1);
         LocalDateTime dateTime = date.atStartOfDay();
-        String lineId= "21";
+
+        LocalDateTime dateFrom = date.atStartOfDay();
+        LocalDateTime dateTo = to.atStartOfDay().plusHours(8);
+
+        String lineId= "23";
+        //List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
+        List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo,  lineId);
+        for (OrderWithComponent owc: list) {
+            System.out.println(owc.toString());
+
+        }
+        return list;
+    }
+
+    public List<OrderWithComponent> selectAllOrdersWithComponentsCodNext(){
+        LocalDate date = LocalDate.now().plusDays(1);;
+        LocalDateTime dateTime = date.atStartOfDay();
+        System.out.println("Cod next date " + dateTime);
+        String lineId= "23";
         List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
         for (OrderWithComponent owc: list) {
             System.out.println(owc.toString());
@@ -81,6 +100,25 @@ public class ApplicationServices {
         }
         return list;
     }
+
+    public List<OrderWithComponent> selectAllOrdersWithComponentsAll(){
+        LocalDate date = LocalDate.now();
+        LocalDate to = LocalDate.now().plusDays(5);
+        LocalDateTime dateTime = date.atStartOfDay();
+
+        LocalDateTime dateFrom = date.atStartOfDay();
+        LocalDateTime dateTo = to.atStartOfDay().plusHours(8);
+
+        String lineId= "23";
+        //List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
+        List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo,  lineId);
+        for (OrderWithComponent owc: list) {
+            System.out.println(owc.toString());
+
+        }
+        return list;
+    }
+
     @Async
     protected void deleteObsoleteOrders(){
         LocalDate date = LocalDate.now().minusWeeks(1);
@@ -92,7 +130,7 @@ public class ApplicationServices {
     /**
      * Run scheduled methods one by one at specific time every day.
      */
-    @Scheduled(cron = "0 10 5 * * MON-FRI")
+    @Scheduled(cron = "0 10 5,9,12,15 * * MON-FRI")
     private void runMethods() {
         CompletableFuture<Void> futureGetOrders = CompletableFuture.runAsync(() -> {
                 System.out.println("Linking Components with orders already started");

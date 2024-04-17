@@ -21,8 +21,15 @@ public class ApplicationController {
 
    @GetMapping
     public List<OrderWithComponent> getAllOrdersWithCompo() {
-      //applicationServices.linkOrderWithComponents();
-       return applicationServices.selectAllOrdersWithComponents();
+     // applicationServices.linkOrderWithComponents();
+     return applicationServices.selectAllOrdersWithComponents();
+
+    }
+
+    @GetMapping("/cod-next")
+    public List<OrderWithComponent> getAllOrdersWithCompoCodNext() {
+
+        return applicationServices.selectAllOrdersWithComponentsCodNext();
     }
 
 

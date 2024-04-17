@@ -16,5 +16,7 @@ public interface OrdersWithComponentRepository extends MongoRepository<OrderWith
 
     List<OrderWithComponent> findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(LocalDateTime date, String lineId);
 
+    List<OrderWithComponent> findOrderWithComponentsBySchedDateBetweenAndLineId(LocalDateTime from, LocalDateTime to, String lineId);
+
     void deleteOrderWithComponentsBySchedDateIsBefore(LocalDateTime date);
 }

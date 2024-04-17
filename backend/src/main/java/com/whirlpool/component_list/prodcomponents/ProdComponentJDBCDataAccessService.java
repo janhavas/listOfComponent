@@ -16,7 +16,7 @@ public class ProdComponentJDBCDataAccessService implements ProdComponentDao {
 
     private final ProdComponetRowMapper prodComponetRowMapper;
 
-    private static final String SP_GET_EXPBOM_BY_FAMILYCODE_BY_DATE = "{call CellAdpt.dbo.StoredGetExpBOM_FAMILYCODE_BY_DATE(?, ?, ?)}";
+    private static final String SP_GET_EXPBOM_BY_FAMILYCODE_BY_DATE = "{call CellAdpt.dbo.StoredGetExpBOM_FamilyCode(?, ?, ?)}";
 
     public ProdComponentJDBCDataAccessService(JdbcTemplate jdbcTemplate, ProdComponetRowMapper prodComponetRowMapper) {
         this.jdbcTemplate = jdbcTemplate;

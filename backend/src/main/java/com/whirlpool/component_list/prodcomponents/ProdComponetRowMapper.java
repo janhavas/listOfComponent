@@ -14,8 +14,11 @@ public class ProdComponetRowMapper implements RowMapper<ProdComponent> {
         String rawStartDate = rs.getString("StartDate");
         String rawEndDate = rs.getString("EndDate");
 
-        String startDate = rawStartDate.substring(0, 4) + "-" + rawStartDate.substring(4, 6) + "-" + rawStartDate.substring(6, 8);
-        String endDate = rawEndDate.substring(0, 4) + "-" + rawEndDate.substring(4, 6) + "-" + rawEndDate.substring(6, 8);
+        String startDate = rawStartDate.substring(0, 10);
+        String endDate = rawEndDate.substring(0, 10);
+
+/*        String startDate = rawStartDate.substring(0, 4) + "-" + rawStartDate.substring(4, 6) + "-" + rawStartDate.substring(6, 8);
+        String endDate = rawEndDate.substring(0, 4) + "-" + rawEndDate.substring(4, 6) + "-" + rawEndDate.substring(6, 8);*/
 
         String rawMatNum = rs.getString("MatNum");
 
