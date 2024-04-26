@@ -40,7 +40,7 @@ const GeneratePrintTable = forwardRef(({selectedOrders}, ref) =>{
                                 <Td fontSize={25} rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.ordNum}</b></Td>
                                 <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.fgNum}</Td>
                                 <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.altBom}</Td>
-                                <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.ordQty}</b></Td>
+                                <Td fontSize={25} rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.ordQty}</b></Td>
                                 <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}><b>{order.indFgDesc}</b></Td>
                                 <Td rowSpan={order.components.length + 1} style={{ textAlign: 'left', verticalAlign: 'top' }}>{order.schedDate}</Td>
 
