@@ -15,14 +15,15 @@ import {
     Thead,
     Tr, VStack
 } from "@chakra-ui/react";
-import {getAllOrdersWithCompo, getAllOrdersFromCodCell, getAllOrdersWithCompoCodNext} from "./services/order.js";
+import {getAllOrdersWithCompo, getAllOrdersFromCodCell, getAllOrdersWithCompoCodNext} from "../services/order.js";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
-import GeneratePrintTable from "./components/GeneratePrintTable.jsx";
+import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
 import {Global} from "@emotion/react";
+import NavBar from "../components/NavBar.jsx";
 
 
 
-function App_bkp() {
+function CodSkrina() {
 
     const [orderscompo, setOrderscompo] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -102,6 +103,8 @@ function App_bkp() {
 
     if (loading) {
         return (
+            <>
+                <NavBar todayRoute={"/codskrina"} fetchOrdersWithCompo={fetchOrdersWithCompo} fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}/>
             <SimpleGrid
                 display={"flex"}
                 justifyContent={"center"}
@@ -116,20 +119,25 @@ function App_bkp() {
                     size='xl'
                 />
             </SimpleGrid>
+            </>
         )
     }
 
     if (orderscompo.length <= 0) {
         return (
+            <>
+            <NavBar todayRoute={"/codskrina"} fetchOrdersWithCompo={fetchOrdersWithCompo} fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}/>
             <SimpleGrid>
                 <Text fontSize='2xl'>No Orders</Text>
             </SimpleGrid>
+            </>
         )
     }
 
 
     return (
         <>
+            <NavBar todayRoute={"/codskrina"} fetchOrdersWithCompo={fetchOrdersWithCompo} fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}/>
             <Flex alignItems="center" justifyContent="center">
             <Heading lineHeight='tall'>
                 <Highlight
@@ -253,4 +261,4 @@ function App_bkp() {
     )
 }
 
-export default App_bkp
+export default CodSkrina

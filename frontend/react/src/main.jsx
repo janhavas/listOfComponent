@@ -1,14 +1,34 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App_bkp from './App_bkp.jsx'
-import { ChakraProvider } from '@chakra-ui/react'
+import {ChakraProvider} from '@chakra-ui/react'
 import './index.css'
 import App from "./App.jsx";
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
+import CodPanel from "./Pages/CodPanel.jsx";
+import CodSkrina from "./Pages/CodSkrina.jsx";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <App/>,
+    },
+    {
+        path: "/codpanel",
+        element: <CodPanel/>,
+    },
+    {
+        path: "/codskrina",
+        element: <CodSkrina/>,
+    },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <ChakraProvider>
+            <RouterProvider router={router} />
+        </ChakraProvider>
+    </React.StrictMode>,
 )

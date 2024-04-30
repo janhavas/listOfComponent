@@ -13,10 +13,11 @@ import {
     Wrap,
     WrapItem,
 } from '@chakra-ui/react'
-
+import {Link} from "react-router-dom";
 export default function App() {
     return (
         <>
+
             <Center py={6}>
                 <Wrap justify="center">
                     <WrapItem>
@@ -71,9 +72,11 @@ export default function App() {
                                                     }}
                                                     _focus={{
                                                         bg: 'green.500',
-                                                    }}>
-                                                    Zobraz objednávky
+                                                    }}
+                                                    >
+                                                    <Link to={"/codskrina"}>Zobraz materiál</Link>
                                                 </Button>
+
                                             </CardHeader>
 
                                         </Card>
@@ -95,7 +98,7 @@ export default function App() {
                                                     _focus={{
                                                         bg: 'green.500',
                                                     }}>
-                                                    Zobraz objednávky
+                                                    <Link to={"/codpanel"}>Zobraz materiál</Link>
                                                 </Button>
                                             </CardHeader>
 
