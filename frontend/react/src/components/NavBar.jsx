@@ -17,21 +17,28 @@ import {
 } from '@chakra-ui/react'
 import {Link} from "react-router-dom";
 
-const Links = ['Domov', 'Dnes', 'Zajtra']
 
-const NavLink = ({to, children}) => {
+
+const NavLink = ({to, children, onClick}) => {
+    const handleClick = (event) => {
+        // If onClick is provided, call it
+        if (onClick) {
+            onClick(event);
+        }
+    };
     return (
         <Box
             as={Link} // Use Link component instead of 'a' tag
             to={to} // Use 'to' prop instead of 'href'
             px={2}
-            py={1}
+            py={2}
             rounded={'md'}
             _hover={{
                 textDecoration: 'none',
-                bg: useColorModeValue('blue.200', 'blue.700'),
+                bg: useColorModeValue('green.200', 'blue.700'),
             }}
-            href={'#'}>
+            onClick={handleClick} // Call handleClick on click event
+            >
             {children}
         </Box>
     )
@@ -39,7 +46,7 @@ const NavLink = ({to, children}) => {
 
 
 
-export default function NavBar({todayRoute,  fetchOrdersWithCompo, fetchOrdersWithCompoCodNext}) {
+export default function NavBar({todayRoute,  fetchOrdersWithCompo, fetchOrdersWithCompoCodNext,handlePrintSelect, handlePrintAll}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -56,14 +63,16 @@ export default function NavBar({todayRoute,  fetchOrdersWithCompo, fetchOrdersWi
                             />
                         </Box>
                         <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                            <NavLink to="/" px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: useColorModeValue('blue.200', 'blue.700') }}>
-                                Domov
+                            <NavLink to="/" >Domov</NavLink>
+
+                            <NavLink onClick={fetchOrdersWithCompo} >Dnes</NavLink>
+
+                            <NavLink onClick={fetchOrdersWithCompoCodNext} >Zajtra</NavLink>
+                            <NavLink onClick={handlePrintSelect} >
+                                Tlač vybrané
                             </NavLink>
-                            <NavLink to={todayRoute} onClick={fetchOrdersWithCompo} px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: useColorModeValue('blue.200', 'blue.700') }}>
-                                Dnes
-                            </NavLink>
-                            <NavLink to={todayRoute}  onClick={fetchOrdersWithCompoCodNext} px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: useColorModeValue('blue.200', 'blue.700') }}>
-                                Zajtra
+                            <NavLink onClick={handlePrintAll} >
+                                 Tlač všetky
                             </NavLink>
 
                         </HStack>

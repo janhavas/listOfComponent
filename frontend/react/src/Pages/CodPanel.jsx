@@ -5,7 +5,7 @@ function CodPanel(){
 
     return (
         <>
-            <NavBar todayRoute={"/codpanel"} tomorrowRoute={"/codskrina"}/>
+            <NavBar todayRoute={"/codskrina"} />
 
             <div>Cod Panel</div>
         </>

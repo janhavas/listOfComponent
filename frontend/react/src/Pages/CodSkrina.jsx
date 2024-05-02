@@ -137,7 +137,12 @@ function CodSkrina() {
 
     return (
         <>
-            <NavBar todayRoute={"/codskrina"} fetchOrdersWithCompo={fetchOrdersWithCompo} fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}/>
+            <NavBar todayRoute={"/codskrina"}
+                    fetchOrdersWithCompo={fetchOrdersWithCompo}
+                    fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}
+                    handlePrintSelect={handlePrintSelect}
+                    handlePrintAll={handlePrintAll}
+            />
             <Flex alignItems="center" justifyContent="center">
             <Heading lineHeight='tall'>
                 <Highlight
@@ -151,21 +156,7 @@ function CodSkrina() {
             </Flex>
 
 
-            <Container maxW='8xl'>
-                    <Box>
-                        <div>
-                            <div style={{ display: "none" }}>
-                                <GeneratePrintTable selectedOrders={selectedRows} ref={componentRef} />
-                            </div>
-                            <Button onClick={ fetchOrdersWithCompo } colorScheme='green' marginRight={'10px'}>Domov</Button>
-                            <Button onClick={ handlePrintSelect } colorScheme='green' marginLeft={'10px'}>Tlačiť vybrané</Button>
-                            <Button onClick={ handlePrintAll } colorScheme='green' marginLeft={'10px'}>Tlačiť všetko</Button>
-                            {/*<Button onClick={ fetchOrdersFromCodCell } colorScheme='messenger' marginLeft={'10px'}>Objednávky Tracking stanica</Button>*/}
-                            <Button onClick={ fetchOrdersWithCompoCodNext } colorScheme='red' marginLeft={'10px'}>Zajtra</Button>
-                        </div>
 
-                    </Box>
-            </Container>
 
 
             <Flex alignItems="center" justifyContent="center">
