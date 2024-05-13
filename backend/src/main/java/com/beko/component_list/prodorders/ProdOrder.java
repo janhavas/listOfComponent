@@ -1,4 +1,4 @@
-package com.whirlpool.component_list.prodorders;
+package com.beko.component_list.prodorders;
 
 import java.sql.Timestamp;
 

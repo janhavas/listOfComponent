@@ -1,17 +1,8 @@
-package com.whirlpool.component_list;
+package com.beko.component_list;
 
-import com.whirlpool.component_list.prodcomponents.ProdComponent;
-import com.whirlpool.component_list.prodorders.OrderWithComponent;
-import com.whirlpool.component_list.prodorders.OrdersWithComponentRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling

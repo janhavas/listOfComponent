@@ -1,8 +1,5 @@
-package com.whirlpool.component_list.prodorders;
+package com.beko.component_list.prodorders;
 
-import com.whirlpool.component_list.prodcomponents.ProdComponent;
-import com.whirlpool.component_list.prodcomponents.ProdComponentDao;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

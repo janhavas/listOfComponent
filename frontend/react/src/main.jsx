@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import CodPanel from "./Pages/CodPanel.jsx";
 import CodSkrina from "./Pages/CodSkrina.jsx";
+import FlexSkrina from "./Pages/FlexSkrina.jsx";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     {
         path: "/codskrina",
         element: <CodSkrina/>,
+    },
+    {
+        path: "/flexskrina",
+        element: <FlexSkrina/>,
     },
 ]);
 

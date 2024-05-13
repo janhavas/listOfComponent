@@ -1,10 +1,9 @@
-package com.whirlpool.component_list;
+package com.beko.component_list;
 
-import com.whirlpool.component_list.prodorders.OrderWithComponent;
-import com.whirlpool.component_list.prodorders.ProdOrder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.beko.component_list.prodorders.OrderWithComponent;
+import com.beko.component_list.prodorders.OrderWithComponentRequestDTO;
+import com.beko.component_list.prodorders.OrderWithComponentRespondDTO;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,10 +31,11 @@ public class ApplicationController {
         return applicationServices.selectAllOrdersWithComponentsCodNext();
     }
 
+    @PostMapping
+    public List<OrderWithComponentRespondDTO> getAllOrdersWithComponentByWksId(@RequestBody OrderWithComponentRequestDTO userRequest){
+        return applicationServices.selectAllOrdersWithComponentsByLineAndFamCodes(userRequest);
+    }
 
-/*    @GetMapping
-    public void getAllOrdersWithCompo() {
-        applicationServices.linkOrderWithComponents();
-    }*/
+
 
 }

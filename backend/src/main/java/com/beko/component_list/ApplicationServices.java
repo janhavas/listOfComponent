@@ -1,11 +1,9 @@
-package com.whirlpool.component_list;
+package com.beko.component_list;
 
-import com.whirlpool.component_list.prodcomponents.ProdComponent;
-import com.whirlpool.component_list.prodcomponents.ProdComponentDao;
-import com.whirlpool.component_list.prodorders.OrderWithComponent;
-import com.whirlpool.component_list.prodorders.OrdersWithComponentRepository;
-import com.whirlpool.component_list.prodorders.ProdOrder;
-import com.whirlpool.component_list.prodorders.ProdOrderDao;
+import com.beko.component_list.prodorders.*;
+import com.beko.component_list.prodcomponents.ProdComponent;
+import com.beko.component_list.prodcomponents.ProdComponentDao;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -13,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -26,6 +23,15 @@ public class ApplicationServices {
     private final ProdOrderDao prodOrderDao;
 
     private final ProdComponentDao prodComponentDao;
+
+    @Value("${application.config.familyIdList0102}")
+    private String famCodes0102;
+
+    @Value("${application.config.familyIdList0103}")
+    private String famCodes0103;
+
+    @Value("${application.config.familyIdList0202}")
+    private String famCodes0202;
 
 
     public ApplicationServices(OrdersWithComponentRepository repository, ProdOrderDao prodOrderDao, ProdComponentDao prodComponentDao) {
@@ -70,6 +76,64 @@ public class ApplicationServices {
 
     }
 
+    public List<OrderWithComponentRespondDTO> selectAllOrdersWithComponentsByLineAndFamCodes(OrderWithComponentRequestDTO request){
+        LocalDate date = null;
+        if("dnes".equals(request.date())){
+            date = LocalDate.now();
+        } else if ("zajtra".equals(request.date())) {
+            date = LocalDate.now().plusDays(1);
+        }
+
+
+        List<String> famCodes = new ArrayList<>();
+        String lineId = switch (request.wksId()) {
+            case "0102" -> {
+                famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                yield "22";
+            }
+            case "0103" -> {
+                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
+                yield "22";
+            }
+            case "0202" -> {
+                famCodes.addAll(Arrays.asList("0027"));
+                yield "23";
+            }
+            default -> "";
+        };
+        List<OrderWithComponentRespondDTO> filteredOrders = new ArrayList<>();
+        if(!lineId.isEmpty() && date !=null){
+            LocalDateTime dateFrom = date.atStartOfDay();
+            LocalDateTime dateTo = date.atStartOfDay().plusHours(24);
+
+        List<OrderWithComponent> orders= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo, lineId);
+
+        for (OrderWithComponent order : orders) {
+
+            List<ProdComponent> components = order.getComponents();
+            List<ProdComponent> filteredComponents = new ArrayList<>();
+
+            for (ProdComponent component : components) {
+                if (famCodes.contains(component.getFamCode())) {
+                   filteredComponents.add(component);
+                }
+            }
+
+            if (!filteredComponents.isEmpty()) {
+                OrderWithComponentRespondDTO filteredOrder = new OrderWithComponentRespondDTO(order.getId(),order.getLineId(), order.getOrdNum(), order.getFgNum(), order.getAltBom(), order.getIndFgNum(), order.getIndFgDesc(), order.getSchedDate(), order.getOrdQty(), filteredComponents);
+                filteredOrders.add(filteredOrder);
+            }
+        }
+
+        for (OrderWithComponentRespondDTO owc: filteredOrders) {
+            System.out.println(owc.toString());
+
+        }
+        }
+        return filteredOrders;
+
+    }
+
     public List<OrderWithComponent> selectAllOrdersWithComponents(){
         LocalDate date = LocalDate.now();
         LocalDate to = LocalDate.now().plusDays(1);
@@ -78,7 +142,7 @@ public class ApplicationServices {
         LocalDateTime dateFrom = date.atStartOfDay();
         LocalDateTime dateTo = to.atStartOfDay().plusHours(8);
 
-        String lineId= "23";
+        String lineId= "22";
         //List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
         List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo,  lineId);
         for (OrderWithComponent owc: list) {

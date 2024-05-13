@@ -1,13 +1,11 @@
-package com.whirlpool.component_list.prodorders;
+package com.beko.component_list.prodorders;
 
-import com.whirlpool.component_list.prodcomponents.ProdComponent;
+import com.beko.component_list.prodcomponents.ProdComponent;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 @Document
 public class OrderWithComponent {
@@ -37,6 +35,8 @@ public class OrderWithComponent {
         this.ordQty = ordQty;
         this.components = components;
     }
+
+
 
 
 

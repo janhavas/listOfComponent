@@ -3,14 +3,13 @@ import {useRef, useState} from "react";
 import {getAllOrdersWithCompo, getAllOrdersWithCompoCodNext} from "../services/order.js";
 
 
-function CodPanel(){
+function FlexSkrina(){
 
     const [orderscompo, setOrderscompo] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
     const componentRef = useRef();
     const componentRefAll = useRef();
-
 
     const fetchOrdersWithCompo = () => {
         setLoading(true);
@@ -49,4 +48,4 @@ function CodPanel(){
 
 }
 
-export default CodPanel
+export default FlexSkrina

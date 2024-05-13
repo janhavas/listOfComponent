@@ -104,7 +104,7 @@ export default function App() {
 
                                         </Card>
                                     </WrapItem>
-                                    <WrapItem>
+                                    {/*<WrapItem>
                                         <Card>
                                             <CardHeader>
                                                 <Heading size='md'> Pracovisko</Heading>
@@ -126,7 +126,7 @@ export default function App() {
                                             </CardHeader>
 
                                         </Card>
-                                    </WrapItem>
+                                    </WrapItem>*/}
                                 </Wrap>
 
                             </Box>
@@ -175,12 +175,12 @@ export default function App() {
                                                     _focus={{
                                                         bg: 'green.500',
                                                     }}>
-                                                    Zobraz objednávky
+                                                    Zobraz materiál
                                                 </Button>
                                             </CardHeader>
                                         </Card>
                                     </WrapItem>
-                                    <WrapItem>
+                                    {/*<WrapItem>
                                         <Card>
                                             <CardHeader>
                                                 <Heading size='md'> Panel</Heading>
@@ -201,12 +201,12 @@ export default function App() {
                                                 </Button>
                                             </CardHeader>
                                         </Card>
-                                    </WrapItem>
+                                    </WrapItem>*/}
                                 </Wrap>
                             </Box>
                         </Box>
                     </WrapItem>
-                    <WrapItem>
+                    {/*<WrapItem>
                         <Box
                             maxW={'480px'}
                             w={'full'}
@@ -403,7 +403,7 @@ export default function App() {
 
                             </Box>
                         </Box>
-                    </WrapItem>
+                    </WrapItem>*/}
                 </Wrap>
             </Center>
         </>

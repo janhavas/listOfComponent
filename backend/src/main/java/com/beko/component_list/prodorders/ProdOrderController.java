@@ -1,6 +1,5 @@
-package com.whirlpool.component_list.prodorders;
+package com.beko.component_list.prodorders;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

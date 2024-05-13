@@ -1,4 +1,4 @@
-package com.whirlpool.component_list.prodcomponents;
+package com.beko.component_list.prodcomponents;
 
 public record ComponentRequest(
         String fg,

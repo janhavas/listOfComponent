@@ -1,4 +1,4 @@
-package com.whirlpool.component_list.prodcomponents;
+package com.beko.component_list.prodcomponents;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.whirlpool.component_list.prodcomponents;
+package com.beko.component_list.prodcomponents;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

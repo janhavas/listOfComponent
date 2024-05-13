@@ -1,4 +1,4 @@
-package com.whirlpool.component_list.prodcomponents;
+package com.beko.component_list.prodcomponents;
 
 import java.util.List;
 

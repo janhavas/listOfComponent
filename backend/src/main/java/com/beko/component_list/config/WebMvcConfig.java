@@ -1,4 +1,4 @@
-package com.whirlpool.component_list.config;
+package com.beko.component_list.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
