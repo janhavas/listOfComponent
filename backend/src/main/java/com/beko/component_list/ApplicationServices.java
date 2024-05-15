@@ -89,15 +89,15 @@ public class ApplicationServices {
         String lineId = switch (request.wksId()) {
             case "0102" -> {
                 famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
-                yield "22";
+                yield "23";
             }
             case "0103" -> {
                 famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
-                yield "22";
+                yield "23";
             }
             case "0202" -> {
-                famCodes.addAll(Arrays.asList("0027"));
-                yield "23";
+                famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                yield "24";
             }
             default -> "";
         };

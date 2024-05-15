@@ -19,6 +19,7 @@ import {
 import {getAllOrdersFromCodCell, getAllOrdersWithCompo, getAllOrdersWithCompoCodNext} from "../services/order.js";
 import {useReactToPrint} from "react-to-print";
 import NavBar from "../components/NavBar.jsx";
+import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
 
 
 function CodSkrina() {
@@ -28,7 +29,7 @@ function CodSkrina() {
     const [selectedRows, setSelectedRows] = useState([]);
     const componentRef = useRef();
     const componentRefAll = useRef();
-
+    const workstation = {wksId:'0102'};
 
     const marginTop = "10px"
     const marginRight = "5px"
@@ -37,20 +38,23 @@ function CodSkrina() {
 
     const fetchOrdersWithCompo = () => {
         setLoading(true);
-        getAllOrdersWithCompo().then(res => {
+        workstation.date = 'dnes';
+        getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo(res.data)
             console.log("Default data: " + JSON.stringify(res))
             console.log("Received components:", JSON.stringify(res.components))
         }).catch(err => {
             console.log(err)
         }).finally(() => {
+            delete workstation.date;
             setLoading(false)
         })
     }
 
     const fetchOrdersWithCompoCodNext = () => {
         setLoading(true);
-        getAllOrdersWithCompoCodNext().then(res => {
+        workstation.date='zajtra';
+        getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo([]);
             setOrderscompo(res.data)
             console.log("Default data: " + JSON.stringify(res))
@@ -58,6 +62,7 @@ function CodSkrina() {
         }).catch(err => {
             console.log(err)
         }).finally(() => {
+            delete workstation.date;
             setLoading(false)
         })
     }
@@ -91,7 +96,7 @@ function CodSkrina() {
 
     useEffect(() => {
         fetchOrdersWithCompo();
-        fetchOrdersWithCompoCodNext();
+        /*fetchOrdersWithCompoCodNext();*/
     }, []);
 
 
@@ -137,6 +142,9 @@ function CodSkrina() {
 
     return (
         <>
+            <div style={{display: "none"}}>
+                <GeneratePrintTable selectedOrders={selectedRows} ref={componentRef}/>
+            </div>
             <NavBar todayRoute={"/codskrina"}
                     fetchOrdersWithCompo={fetchOrdersWithCompo}
                     fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}

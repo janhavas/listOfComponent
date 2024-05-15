@@ -175,7 +175,7 @@ export default function App() {
                                                     _focus={{
                                                         bg: 'green.500',
                                                     }}>
-                                                    Zobraz materiál
+                                                    <Link to={"/flexskrina"}>Zobraz materiál</Link>
                                                 </Button>
                                             </CardHeader>
                                         </Card>
@@ -404,6 +404,11 @@ export default function App() {
                             </Box>
                         </Box>
                     </WrapItem>*/}
+                    <WrapItem>
+                        <Box>
+                            <Text fontSize='xs'>ver. 0.0.2</Text>
+                        </Box>
+                    </WrapItem>
                 </Wrap>
             </Center>
         </>
