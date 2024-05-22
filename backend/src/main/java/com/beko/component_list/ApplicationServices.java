@@ -33,6 +33,9 @@ public class ApplicationServices {
     @Value("${application.config.familyIdList0202}")
     private String famCodes0202;
 
+    @Value("${application.config.familyIdList0103}")
+    private String famCodes0203;
+
 
     public ApplicationServices(OrdersWithComponentRepository repository, ProdOrderDao prodOrderDao, ProdComponentDao prodComponentDao) {
         this.repository = repository;
@@ -97,6 +100,10 @@ public class ApplicationServices {
             }
             case "0202" -> {
                 famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                yield "24";
+            }
+            case "0203" -> {
+                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
                 yield "24";
             }
             default -> "";

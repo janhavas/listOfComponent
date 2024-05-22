@@ -180,7 +180,7 @@ export default function App() {
                                             </CardHeader>
                                         </Card>
                                     </WrapItem>
-                                    {/*<WrapItem>
+                                    <WrapItem>
                                         <Card>
                                             <CardHeader>
                                                 <Heading size='md'> Panel</Heading>
@@ -197,11 +197,11 @@ export default function App() {
                                                     _focus={{
                                                         bg: 'green.500',
                                                     }}>
-                                                    Zobraz objednávky
+                                                    <Link to={"/flexpanel"}>Zobraz materiál</Link>
                                                 </Button>
                                             </CardHeader>
                                         </Card>
-                                    </WrapItem>*/}
+                                    </WrapItem>
                                 </Wrap>
                             </Box>
                         </Box>

@@ -10,6 +10,7 @@ import {
 import CodPanel from "./Pages/CodPanel.jsx";
 import CodSkrina from "./Pages/CodSkrina.jsx";
 import FlexSkrina from "./Pages/FlexSkrina.jsx";
+import FlexPanel from "./Pages/FlexPanel.jsx";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     {
         path: "/flexskrina",
         element: <FlexSkrina/>,
+    },
+    {
+        path: "/flexpanel",
+        element: <FlexPanel/>,
     },
 ]);
 
