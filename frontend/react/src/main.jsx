@@ -11,11 +11,19 @@ import CodPanel from "./Pages/CodPanel.jsx";
 import CodSkrina from "./Pages/CodSkrina.jsx";
 import FlexSkrina from "./Pages/FlexSkrina.jsx";
 import FlexPanel from "./Pages/FlexPanel.jsx";
+import FlexVodna from "./Pages/FlexVodna.jsx";
+import FlexAgregat from "./Pages/FlexAgregat.jsx";
+import CodVodna from "./Pages/CodVodna.jsx";
+import CodAgregat from "./Pages/CodAgregat.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App/>,
+    },
+    {
+        path: "/codagregat",
+        element: <CodAgregat/>,
     },
     {
         path: "/codpanel",
@@ -26,12 +34,24 @@ const router = createBrowserRouter([
         element: <CodSkrina/>,
     },
     {
+        path: "/codvodna",
+        element: <CodVodna/>,
+    },
+    {
+        path: "/flexagregat",
+        element: <FlexAgregat/>,
+    },
+    {
         path: "/flexskrina",
         element: <FlexSkrina/>,
     },
     {
         path: "/flexpanel",
         element: <FlexPanel/>,
+    },
+    {
+        path: "/flexvodna",
+        element: <FlexVodna/>,
     },
 ]);
 

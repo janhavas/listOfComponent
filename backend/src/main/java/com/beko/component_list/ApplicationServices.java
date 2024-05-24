@@ -24,17 +24,28 @@ public class ApplicationServices {
 
     private final ProdComponentDao prodComponentDao;
 
+    @Value("${application.config.familyIdList0101}")
+    private String famCodes0101;
+
     @Value("${application.config.familyIdList0102}")
     private String famCodes0102;
 
     @Value("${application.config.familyIdList0103}")
     private String famCodes0103;
 
+    @Value("${application.config.familyIdList0104}")
+    private String famCodes0104;
+
+    @Value("${application.config.familyIdList0201}")
+    private String famCodes0201;
+
     @Value("${application.config.familyIdList0202}")
     private String famCodes0202;
 
-    @Value("${application.config.familyIdList0103}")
+    @Value("${application.config.familyIdList0203}")
     private String famCodes0203;
+    @Value("${application.config.familyIdList0204}")
+    private String famCodes0204;
 
 
     public ApplicationServices(OrdersWithComponentRepository repository, ProdOrderDao prodOrderDao, ProdComponentDao prodComponentDao) {
@@ -90,6 +101,10 @@ public class ApplicationServices {
 
         List<String> famCodes = new ArrayList<>();
         String lineId = switch (request.wksId()) {
+            case "0101" -> {
+                famCodes.addAll(Arrays.asList("0048", "0049", "5040", "0060", "0081", "0084", "0110","0127"));
+                yield "23";
+            }
             case "0102" -> {
                 famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
                 yield "23";
@@ -98,12 +113,24 @@ public class ApplicationServices {
                 famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
                 yield "23";
             }
+            case "0104" -> {
+                famCodes.addAll(Arrays.asList("5025", "5011", "5023", "0031"));
+                yield "23";
+            }
+            case "0201" -> {
+                famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                yield "24";
+            }
             case "0202" -> {
                 famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
                 yield "24";
             }
             case "0203" -> {
                 famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
+                yield "24";
+            }
+            case "0204" -> {
+                famCodes.addAll(Arrays.asList("5025", "5011", "5023", "0031"));
                 yield "24";
             }
             default -> "";

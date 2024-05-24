@@ -30,7 +30,7 @@ export default function App() {
                     </WrapItem>
                     <WrapItem>
                         <Box
-                            maxW={'480px'}
+                            maxW={'430px'}
                             w={'full'}
                             bg={useColorModeValue('white', 'gray.800')}
                             boxShadow={'2xl'}
@@ -55,6 +55,32 @@ export default function App() {
 
                             <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
                                 <Wrap>
+                                    <WrapItem>
+
+                                        <Card>
+                                            <CardHeader>
+                                                <Heading size='md'> Agregát</Heading>
+                                                <Button
+                                                    mt={10}
+                                                    w={'full'}
+                                                    bg={'green.400'}
+                                                    color={'white'}
+                                                    rounded={'xl'}
+                                                    boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                                    _hover={{
+                                                        bg: 'green.500',
+                                                    }}
+                                                    _focus={{
+                                                        bg: 'green.500',
+                                                    }}
+                                                >
+                                                    <Link to={"/codagregat"}>Zobraz materiál</Link>
+                                                </Button>
+
+                                            </CardHeader>
+
+                                        </Card>
+                                    </WrapItem>
                                     <WrapItem>
 
                                         <Card>
@@ -104,10 +130,10 @@ export default function App() {
 
                                         </Card>
                                     </WrapItem>
-                                    {/*<WrapItem>
+                                    <WrapItem>
                                         <Card>
                                             <CardHeader>
-                                                <Heading size='md'> Pracovisko</Heading>
+                                                <Heading size='md'> Vodna</Heading>
                                                 <Button
                                                     mt={10}
                                                     w={'full'}
@@ -121,12 +147,12 @@ export default function App() {
                                                     _focus={{
                                                         bg: 'green.500',
                                                     }}>
-                                                    Zobraz objednávky
+                                                    <Link to={"/codvodna"}>Zobraz materiál</Link>
                                                 </Button>
                                             </CardHeader>
 
                                         </Card>
-                                    </WrapItem>*/}
+                                    </WrapItem>
                                 </Wrap>
 
                             </Box>
@@ -134,7 +160,7 @@ export default function App() {
                     </WrapItem>
                     <WrapItem>
                         <Box
-                            maxW={'630px'}
+                            maxW={'430px'}
                             w={'full'}
                             bg={useColorModeValue('white', 'gray.800')}
                             boxShadow={'2xl'}
@@ -158,6 +184,28 @@ export default function App() {
 
                             <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
                                 <Wrap>
+                                    <WrapItem>
+                                        <Card>
+                                            <CardHeader>
+                                                <Heading size='md'> Agregát</Heading>
+                                                <Button
+                                                    mt={10}
+                                                    w={'full'}
+                                                    bg={'green.400'}
+                                                    color={'white'}
+                                                    rounded={'xl'}
+                                                    boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                                    _hover={{
+                                                        bg: 'green.500',
+                                                    }}
+                                                    _focus={{
+                                                        bg: 'green.500',
+                                                    }}>
+                                                    <Link to={"/flexagregat"}>Zobraz materiál</Link>
+                                                </Button>
+                                            </CardHeader>
+                                        </Card>
+                                    </WrapItem>
                                     <WrapItem>
                                         <Card>
                                             <CardHeader>
@@ -198,6 +246,28 @@ export default function App() {
                                                         bg: 'green.500',
                                                     }}>
                                                     <Link to={"/flexpanel"}>Zobraz materiál</Link>
+                                                </Button>
+                                            </CardHeader>
+                                        </Card>
+                                    </WrapItem>
+                                    <WrapItem>
+                                        <Card>
+                                            <CardHeader>
+                                                <Heading size='md'> Vodna</Heading>
+                                                <Button
+                                                    mt={10}
+                                                    w={'full'}
+                                                    bg={'green.400'}
+                                                    color={'white'}
+                                                    rounded={'xl'}
+                                                    boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                                                    _hover={{
+                                                        bg: 'green.500',
+                                                    }}
+                                                    _focus={{
+                                                        bg: 'green.500',
+                                                    }}>
+                                                    <Link to={"/flexvodna"}>Zobraz materiál</Link>
                                                 </Button>
                                             </CardHeader>
                                         </Card>
@@ -406,7 +476,7 @@ export default function App() {
                     </WrapItem>*/}
                     <WrapItem>
                         <Box>
-                            <Text fontSize='xs'>ver. 0.0.2</Text>
+                            <Text fontSize='xs'>ver. 0.0.4</Text>
                         </Box>
                     </WrapItem>
                 </Wrap>
