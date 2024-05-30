@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.beko</groupId>
     <artifactId>component_list</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <name>component_list</name>
     <description>Display Components for Finished Goods.</description>
     <properties>

@@ -476,7 +476,7 @@ export default function App() {
                     </WrapItem>*/}
                     <WrapItem>
                         <Box>
-                            <Text fontSize='xs'>ver. 0.0.4</Text>
+                            <Text fontSize='xs'>ver. 0.0.5</Text>
                         </Box>
                     </WrapItem>
                 </Wrap>

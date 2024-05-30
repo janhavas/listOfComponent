@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.CallableStatement;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class ProdOrderJDBCDataAccessService implements ProdOrderDao {
     @Override
     public List<ProdOrder> selectAllProdOrders() {
         String startDate = LocalDate.now().toString();
-        String endDate = LocalDate.now().plusDays(2).toString();
-
+        LocalDate nextDay = setMondayIfWeekend(LocalDate.now().plusDays(2));
+        String endDate = nextDay.toString();
 
         return jdbcTemplate.query(connection -> {
             CallableStatement callableStatement = connection.prepareCall(SP_GET_ORDER_BY_CRITERIA);
@@ -40,5 +41,20 @@ public class ProdOrderJDBCDataAccessService implements ProdOrderDao {
             callableStatement.setString(5, endDate);
             return callableStatement;
         },prodOrderRowMapper);
+    }
+
+    private LocalDate setMondayIfWeekend(LocalDate date) {
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        switch (dayOfWeek) {
+            case SATURDAY -> {
+                return date.plusDays(3);
+            }
+            case SUNDAY -> {
+                return date.plusDays(2);
+            }
+            default -> {
+                return date;
+            }
+        }
     }
 }

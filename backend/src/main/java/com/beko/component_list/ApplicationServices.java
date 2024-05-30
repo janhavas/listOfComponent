@@ -140,7 +140,18 @@ public class ApplicationServices {
             LocalDateTime dateFrom = date.atStartOfDay();
             LocalDateTime dateTo = date.atStartOfDay().plusHours(24);
 
-        List<OrderWithComponent> orders= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo, lineId);
+        List<OrderWithComponent> orders = null;
+        LocalDateTime originalDateTo = dateTo;
+
+        do {
+            orders = repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo, lineId);
+            if (orders.isEmpty()){
+                dateTo = dateTo.plusDays(1);
+                if(dateTo.isAfter(originalDateTo.plusDays(2))){
+                    break; //If dateTo is more than orginalDateTo + 3 days, break the cycle to prevent runs method to infinity.
+                }
+            }
+        }while (orders.isEmpty());
 
         for (OrderWithComponent order : orders) {
 
@@ -167,6 +178,7 @@ public class ApplicationServices {
         return filteredOrders;
 
     }
+
 
     public List<OrderWithComponent> selectAllOrdersWithComponents(){
         LocalDate date = LocalDate.now();
