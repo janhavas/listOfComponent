@@ -110,7 +110,7 @@ public class ApplicationServices {
                 yield "23";
             }
             case "0103" -> {
-                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
+                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011", "0087", "0006"));
                 yield "23";
             }
             case "0104" -> {
@@ -118,7 +118,7 @@ public class ApplicationServices {
                 yield "23";
             }
             case "0201" -> {
-                famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                famCodes.addAll(Arrays.asList("0048", "0049", "5040", "0060", "0081", "0084", "0110","0127"));
                 yield "24";
             }
             case "0202" -> {
@@ -126,7 +126,7 @@ public class ApplicationServices {
                 yield "24";
             }
             case "0203" -> {
-                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011"));
+                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011", "0087", "0006"));
                 yield "24";
             }
             case "0204" -> {

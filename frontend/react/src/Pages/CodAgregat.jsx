@@ -24,7 +24,7 @@ function CodAgregat(){
     const [selectedRows, setSelectedRows] = useState([]);
     const componentRef = useRef();
     const componentRefAll = useRef();
-    const workstation = {wksId:'01001'};
+    const workstation = {wksId:'0101'};
 
     const marginTop = "10px"
     const marginRight = "5px"
