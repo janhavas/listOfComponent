@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar.jsx";
 import React, {useEffect, useRef, useState} from "react";
-import {getAllOrdersFromCodCell, getAllOrdersWithCompo, getAllOrdersWithCompoCodNext} from "../services/order.js";
+import {getAllOrdersWithCompo} from "../services/order.js";
 import {useReactToPrint} from "react-to-print";
 import {
     Checkbox,
@@ -11,20 +11,25 @@ import {
     Spinner,
     Table,
     TableCaption,
-    TableContainer, Tbody, Td,
-    Text, Th, Thead, Tr
+    TableContainer,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr
 } from "@chakra-ui/react";
 import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
 
 
-function CodPanel(){
+function CodPanel() {
 
     const [orderscompo, setOrderscompo] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
     const componentRef = useRef();
     const componentRefAll = useRef();
-    const workstation = {wksId:'0103'};
+    const workstation = {wksId: '0103'};
 
     const marginTop = "10px"
     const marginRight = "5px"
@@ -36,8 +41,8 @@ function CodPanel(){
         workstation.date = 'dnes';
         getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo(res.data)
-            console.log("Default data: " + JSON.stringify(res))
-            console.log("Received components:", JSON.stringify(res.components))
+            /*            console.log("Default data: " + JSON.stringify(res))
+                        console.log("Received components:", JSON.stringify(res.components))*/
         }).catch(err => {
             console.log(err)
         }).finally(() => {
@@ -48,12 +53,12 @@ function CodPanel(){
 
     const fetchOrdersWithCompoCodNext = () => {
         setLoading(true);
-        workstation.date='zajtra';
+        workstation.date = 'zajtra';
         getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo([]);
             setOrderscompo(res.data)
-            console.log("Default data: " + JSON.stringify(res))
-            console.log("Received components:", JSON.stringify(res.components))
+            /*            console.log("Default data: " + JSON.stringify(res))
+                        console.log("Received components:", JSON.stringify(res.components))*/
         }).catch(err => {
             console.log(err)
         }).finally(() => {
@@ -62,17 +67,6 @@ function CodPanel(){
         })
     }
 
-    const fetchOrdersFromCodCell = () => {
-        setLoading(true);
-        getAllOrdersFromCodCell().then(res => {
-            setOrderscompo(res.data)
-            console.log("Data from COD Cell: " + JSON.stringify(res));
-        }).catch(err => {
-            console.log(err)
-        }).finally(() => {
-            setLoading(false)
-        })
-    }
 
     const handlePrintSelect = useReactToPrint({
         content: () => componentRef.current,

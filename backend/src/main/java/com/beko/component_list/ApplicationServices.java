@@ -60,6 +60,19 @@ public class ApplicationServices {
         List<ProdOrder> prodOrders = prodOrderDao.selectAllProdOrders();
         for (ProdOrder prodOrder: prodOrders) {
             List<ProdComponent> prodComponents = prodComponentDao.selectAllComponents(prodOrder.getFgNum(),prodOrder.getAltBom());
+            if(prodComponents != null && !prodComponents.isEmpty()) {
+                prodComponents.sort(new Comparator<ProdComponent>() {
+                    @Override
+                    public int compare(ProdComponent o1, ProdComponent o2) {
+                        int famCodeComparison = o1.getFamCode().compareTo(o2.getFamCode());
+                        if (famCodeComparison != 0) {
+                            return famCodeComparison;
+                        } else {
+                            return o1.getMatNum().compareTo(o2.getMatNum());
+                        }
+                    }
+                });
+            }
             if(prodComponents != null && !prodComponents.isEmpty()){
                 OrderWithComponent orderWithComponent = new OrderWithComponent(
                   prodOrder.getLineId(),
@@ -72,7 +85,7 @@ public class ApplicationServices {
                   prodOrder.getOrdQty(),
                   prodComponents
                 );
-                //TODO: check if the orderWithComponent already exist in the repo by checking the order number
+
 
                 Optional<OrderWithComponent> order = repository.findOrderWithComponentByOrdNum(prodOrder.getOrdNum());
                 if(order.isPresent()){
@@ -170,10 +183,10 @@ public class ApplicationServices {
             }
         }
 
-        for (OrderWithComponentRespondDTO owc: filteredOrders) {
+/*        for (OrderWithComponentRespondDTO owc: filteredOrders) {
             System.out.println(owc.toString());
 
-        }
+        }*/
         }
         return filteredOrders;
 
@@ -191,43 +204,14 @@ public class ApplicationServices {
         String lineId= "22";
         //List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
         List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo,  lineId);
-        for (OrderWithComponent owc: list) {
+/*        for (OrderWithComponent owc: list) {
             System.out.println(owc.toString());
 
-        }
+        }*/
         return list;
     }
 
-    public List<OrderWithComponent> selectAllOrdersWithComponentsCodNext(){
-        LocalDate date = LocalDate.now().plusDays(1);;
-        LocalDateTime dateTime = date.atStartOfDay();
-        System.out.println("Cod next date " + dateTime);
-        String lineId= "23";
-        List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
-        for (OrderWithComponent owc: list) {
-            System.out.println(owc.toString());
 
-        }
-        return list;
-    }
-
-    public List<OrderWithComponent> selectAllOrdersWithComponentsAll(){
-        LocalDate date = LocalDate.now();
-        LocalDate to = LocalDate.now().plusDays(5);
-        LocalDateTime dateTime = date.atStartOfDay();
-
-        LocalDateTime dateFrom = date.atStartOfDay();
-        LocalDateTime dateTo = to.atStartOfDay().plusHours(8);
-
-        String lineId= "23";
-        //List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateIsGreaterThanAndLineId(dateTime, lineId);
-        List<OrderWithComponent> list= repository.findOrderWithComponentsBySchedDateBetweenAndLineId(dateFrom, dateTo,  lineId);
-        for (OrderWithComponent owc: list) {
-            System.out.println(owc.toString());
-
-        }
-        return list;
-    }
 
     @Async
     protected void deleteObsoleteOrders(){

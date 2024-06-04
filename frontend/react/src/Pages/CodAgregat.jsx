@@ -36,8 +36,8 @@ function CodAgregat(){
         workstation.date = 'dnes';
         getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo(res.data)
-            console.log("Default data: " + JSON.stringify(res))
-            console.log("Received components:", JSON.stringify(res.components))
+/*            console.log("Default data: " + JSON.stringify(res))
+            console.log("Received components:", JSON.stringify(res.components))*/
         }).catch(err => {
             console.log(err)
         }).finally(() => {
@@ -52,8 +52,8 @@ function CodAgregat(){
         getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo([]);
             setOrderscompo(res.data)
-            console.log("Default data: " + JSON.stringify(res))
-            console.log("Received components:", JSON.stringify(res.components))
+/*            console.log("Default data: " + JSON.stringify(res))
+            console.log("Received components:", JSON.stringify(res.components))*/
         }).catch(err => {
             console.log(err)
         }).finally(() => {

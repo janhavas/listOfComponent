@@ -11,20 +11,25 @@ import {
     Spinner,
     Table,
     TableCaption,
-    TableContainer, Tbody, Td,
-    Text, Th, Thead, Tr
+    TableContainer,
+    Tbody,
+    Td,
+    Text,
+    Th,
+    Thead,
+    Tr
 } from "@chakra-ui/react";
 import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
 
 
-function FlexAgregat(){
+function FlexAgregat() {
 
     const [orderscompo, setOrderscompo] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
     const componentRef = useRef();
     const componentRefAll = useRef();
-    const workstation = {wksId:'0201'};
+    const workstation = {wksId: '0201'};
 
     const marginTop = "10px"
     const marginRight = "5px"
@@ -36,8 +41,8 @@ function FlexAgregat(){
         workstation.date = 'dnes';
         getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo(res.data)
-            console.log("Default data: " + JSON.stringify(res))
-            console.log("Received components:", JSON.stringify(res.components))
+            /*            console.log("Default data: " + JSON.stringify(res))
+                        console.log("Received components:", JSON.stringify(res.components))*/
         }).catch(err => {
             console.log(err)
         }).finally(() => {
@@ -48,12 +53,12 @@ function FlexAgregat(){
 
     const fetchOrdersWithCompoCodNext = () => {
         setLoading(true);
-        workstation.date='zajtra';
+        workstation.date = 'zajtra';
         getAllOrdersWithCompo(workstation).then(res => {
             setOrderscompo([]);
             setOrderscompo(res.data)
-            console.log("Default data: " + JSON.stringify(res))
-            console.log("Received components:", JSON.stringify(res.components))
+            /*            console.log("Default data: " + JSON.stringify(res))
+                        console.log("Received components:", JSON.stringify(res.components))*/
         }).catch(err => {
             console.log(err)
         }).finally(() => {
@@ -61,7 +66,6 @@ function FlexAgregat(){
             setLoading(false)
         })
     }
-
 
 
     const handlePrintSelect = useReactToPrint({

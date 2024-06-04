@@ -24,9 +24,9 @@ public class ProdComponentJDBCDataAccessService implements ProdComponentDao {
 
     @Override
     public List<ProdComponent> selectAllComponents(String fg, String altBom) {
-        System.out.println("fg>" +fg);
+/*        System.out.println("fg>" +fg);
         System.out.println("altBom>" +altBom);
-        System.out.println("fam code>" + famCodeString);
+        System.out.println("fam code>" + famCodeString);*/
         return jdbcTemplate.query(connection -> {
             CallableStatement callableStatement = connection.prepareCall(SP_GET_EXPBOM_BY_FAMILYCODE_BY_DATE);
             callableStatement.setString(1, fg);
