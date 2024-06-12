@@ -119,7 +119,7 @@ public class ApplicationServices {
                 yield "23";
             }
             case "0102" -> {
-                famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                famCodes.addAll(Arrays.asList("0092", "0027", "0105", "5095"));
                 yield "23";
             }
             case "0103" -> {
@@ -135,7 +135,7 @@ public class ApplicationServices {
                 yield "24";
             }
             case "0202" -> {
-                famCodes.addAll(Arrays.asList("0092", "0027", "5007", "5095"));
+                famCodes.addAll(Arrays.asList("0092", "0027", "0105", "5095"));
                 yield "24";
             }
             case "0203" -> {
