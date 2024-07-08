@@ -8,14 +8,16 @@ public class ProdComponent {
     private String matNum;
     private String matNumDesc;
     private String famCode;
+    private String camCode;
     private String startDate;
     private String endDate;
 
-    public ProdComponent(String matNum, String matNumDesc, String famCode, String startDate, String endDate) {
+    public ProdComponent(String matNum, String matNumDesc, String famCode, String camCode, String startDate, String endDate) {
 
         this.matNum = matNum;
         this.matNumDesc = matNumDesc;
         this.famCode = famCode;
+        this.camCode = camCode;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -60,12 +62,21 @@ public class ProdComponent {
         this.endDate = endDate;
     }
 
+    public String getCamCode() {
+        return camCode;
+    }
+
+    public void setCamCode(String camCode) {
+        this.camCode = camCode;
+    }
+
     @Override
     public String toString() {
-        return "{" +
+        return "ProdComponent{" +
                 "matNum='" + matNum + '\'' +
                 ", matNumDesc='" + matNumDesc + '\'' +
                 ", famCode='" + famCode + '\'' +
+                ", camCode='" + camCode + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
                 '}';

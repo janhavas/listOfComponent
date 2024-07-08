@@ -60,6 +60,13 @@ public class ApplicationServices {
         List<ProdOrder> prodOrders = prodOrderDao.selectAllProdOrders();
         for (ProdOrder prodOrder: prodOrders) {
             List<ProdComponent> prodComponents = prodComponentDao.selectAllComponents(prodOrder.getFgNum(),prodOrder.getAltBom());
+            List<ProdComponent> prodComponentsWithCamCode = prodComponentDao.selectAllComponentsByCamCode(prodOrder.getFgNum(),prodOrder.getAltBom());
+
+            //merge two components based on camCode, all from compo1 with camCode from compo2, all from compo2 when no compo1
+            if((prodComponents !=null && !prodComponents.isEmpty()) || (prodComponentsWithCamCode !=null && !prodComponentsWithCamCode.isEmpty())){
+                mergeList(prodComponents, prodComponentsWithCamCode);
+            }
+
             if(prodComponents != null && !prodComponents.isEmpty()) {
                 prodComponents.sort(new Comparator<ProdComponent>() {
                     @Override
@@ -113,13 +120,15 @@ public class ApplicationServices {
 
 
         List<String> famCodes = new ArrayList<>();
+        List<String> camCodes = new ArrayList<>();
         String lineId = switch (request.wksId()) {
             case "0101" -> {
                 famCodes.addAll(Arrays.asList("0048", "0049", "5040", "0060", "0081", "0084", "0110","0127"));
                 yield "23";
             }
             case "0102" -> {
-                famCodes.addAll(Arrays.asList("0092", "0027", "0105", "5095"));
+                //famCodes.addAll(Arrays.asList("0092", "0027", "0105", "5095", "5007"));
+                camCodes.addAll(Arrays.asList("ACU1","S-TL","S-KA","S-CE","S-PR","S-OC","S-NA"));
                 yield "23";
             }
             case "0103" -> {
@@ -135,7 +144,8 @@ public class ApplicationServices {
                 yield "24";
             }
             case "0202" -> {
-                famCodes.addAll(Arrays.asList("0092", "0027", "0105", "5095"));
+                //famCodes.addAll(Arrays.asList("0092", "0027", "0105", "5095", "5007"));
+                camCodes.addAll(Arrays.asList("ACU1","S-TL","S-KA","S-CE","S-PR","S-OC","S-NA"));
                 yield "24";
             }
             case "0203" -> {
@@ -172,9 +182,16 @@ public class ApplicationServices {
             List<ProdComponent> filteredComponents = new ArrayList<>();
 
             for (ProdComponent component : components) {
-                if (famCodes.contains(component.getFamCode())) {
-                   filteredComponents.add(component);
+                if (request.wksId().equals("0102") || request.wksId().equals("0202")) {
+                  if (camCodes.contains(component.getCamCode())){
+                      filteredComponents.add(component);
+                  }
+                }else {
+                    if (famCodes.contains(component.getFamCode())) {
+                        filteredComponents.add(component);
+                    }
                 }
+
             }
 
             if (!filteredComponents.isEmpty()) {
@@ -235,6 +252,32 @@ public class ApplicationServices {
         futureGetOrders.thenRunAsync(this::deleteObsoleteOrders);
 
 
+    }
+
+    private static void mergeList(List<ProdComponent> list1, List<ProdComponent> list2){
+        for (ProdComponent component2 : list2) {
+            boolean found = false;
+            for (ProdComponent component1 : list1) {
+                if (component1.getMatNum().equals(component2.getMatNum())){
+                    component1.setCamCode(component2.getCamCode());
+                    found = true;
+                    break;
+                }
+            }
+            if (!found){
+                boolean alreadyExists = false;
+                for (ProdComponent component1 : list1) {
+                    if (component1.getMatNum().equals(component2.getMatNum())){
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+                if (!alreadyExists){
+                    list1.add(component2);
+                }
+
+            }
+        }
     }
 
 

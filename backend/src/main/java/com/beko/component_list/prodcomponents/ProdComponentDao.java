@@ -5,4 +5,5 @@ import java.util.List;
 public interface ProdComponentDao {
 
     List<ProdComponent> selectAllComponents(String fg, String altBom);
+    List<ProdComponent> selectAllComponentsByCamCode(String fg, String altBom);
 }
