@@ -21,7 +21,6 @@ public class ApplicationServices {
 
     private final OrdersWithComponentRepository repository;
     private final ProdOrderDao prodOrderDao;
-
     private final ProdComponentDao prodComponentDao;
 
     @Value("${application.config.familyIdList0101}")
@@ -123,7 +122,7 @@ public class ApplicationServices {
         List<String> camCodes = new ArrayList<>();
         String lineId = switch (request.wksId()) {
             case "0101" -> {
-                famCodes.addAll(Arrays.asList("0048", "0049", "5040", "0060", "0081", "0084", "0110","0127"));
+                camCodes.addAll(Arrays.asList("A-ZN", "A-PN", "A-OT", "A-TV", "A-PZ", "A-HC", "A-RE","A-MO", "A-ZH", "A-ZP"));
                 yield "23";
             }
             case "0102" -> {
@@ -132,15 +131,17 @@ public class ApplicationServices {
                 yield "23";
             }
             case "0103" -> {
-                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011", "0087", "0006"));
+                //famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011", "0087", "0006"));
+                camCodes.addAll(Arrays.asList("UI01","P-DV","P-ZA","P-SO","P-RU","P-NA","P-GO","CFNA"));
                 yield "23";
             }
             case "0104" -> {
-                famCodes.addAll(Arrays.asList("5025", "5011", "5023", "0031"));
+                //famCodes.addAll(Arrays.asList("5025", "5011", "5023", "0031"));
+                camCodes.addAll(Arrays.asList("V-PV","V-SN","CFNB","V-NA","V-KO","V-TK","V-KI","V-HP", "V-HD"));
                 yield "23";
             }
             case "0201" -> {
-                famCodes.addAll(Arrays.asList("0048", "0049", "5040", "0060", "0081", "0084", "0110","0127"));
+                camCodes.addAll(Arrays.asList("A-ZN", "A-PN", "A-OT", "A-TV", "A-PZ", "A-HC", "A-RE","A-MO", "A-ZH", "A-ZP"));
                 yield "24";
             }
             case "0202" -> {
@@ -149,11 +150,13 @@ public class ApplicationServices {
                 yield "24";
             }
             case "0203" -> {
-                famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011", "0087", "0006"));
+                //famCodes.addAll(Arrays.asList("5094", "5021", "0017", "5015", "0128", "0093", "5011", "0087", "0006"));
+                camCodes.addAll(Arrays.asList("UI01","P-DV","P-ZA","P-SO","P-RU","P-GO","CFNB", "P-NA"));
                 yield "24";
             }
             case "0204" -> {
-                famCodes.addAll(Arrays.asList("5025", "5011", "5023", "0031"));
+                //famCodes.addAll(Arrays.asList("5025", "5011", "5023", "0031"));
+                camCodes.addAll(Arrays.asList("V-PV","V-SN","V-NA","V-KO","V-TK","V-KI","V-HP", "V-HD", "CFNA"));
                 yield "24";
             }
             default -> "";
@@ -182,15 +185,11 @@ public class ApplicationServices {
             List<ProdComponent> filteredComponents = new ArrayList<>();
 
             for (ProdComponent component : components) {
-                if (request.wksId().equals("0102") || request.wksId().equals("0202")) {
-                  if (camCodes.contains(component.getCamCode())){
-                      filteredComponents.add(component);
-                  }
-                }else {
-                    if (famCodes.contains(component.getFamCode())) {
+
+                    if (camCodes.contains(component.getCamCode())){
                         filteredComponents.add(component);
                     }
-                }
+
 
             }
 

@@ -10,11 +10,12 @@ import java.sql.SQLException;
 public class ProdComponetRowMapper implements RowMapper<ProdComponent> {
     @Override
     public ProdComponent mapRow(ResultSet rs, int rowNum) throws SQLException {
-        String rawStartDate = rs.getString("StartDate");
-        String rawEndDate = rs.getString("EndDate");
+        String rawStartDate = rs.getString("StartDate").trim();
+        String rawEndDate = rs.getString("EndDate").trim();
         String startDate;
         String endDate;
         int lenghtOfStartDate = rawStartDate.length();
+
         if(lenghtOfStartDate == 8){
             startDate = rawStartDate.substring(0,4)+"-"+rawStartDate.substring(4,6)+"-"+rawStartDate.substring(6,8);
             endDate = rawEndDate.substring(0,4)+"-"+rawEndDate.substring(4,6)+"-"+rawEndDate.substring(6,8);

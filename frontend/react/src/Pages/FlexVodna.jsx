@@ -179,7 +179,7 @@ function FlexVodna() {
                                     výroby</Th>
                                 <Th>Materiál</Th>
                                 <Th>Popis materiálu</Th>
-                                <Th minW="80px" maxW="80px" style={{whiteSpace: "pre-wrap", wordWrap: "break-word"}}>Family
+                                <Th minW="80px" maxW="80px" style={{whiteSpace: "pre-wrap", wordWrap: "break-word"}}>Cam
                                     Code</Th>
                                 <Th minW="110px" maxW="120px" style={{whiteSpace: "pre-wrap", wordWrap: "break-word"}}>Začiatok
                                     platnosti</Th>
@@ -210,7 +210,7 @@ function FlexVodna() {
                                                                 components: order.components.map((component) => ({
                                                                     matNum: component.matNum,
                                                                     matNumDesc: component.matNumDesc,
-                                                                    famCode: component.famCode,
+                                                                    camCode: component.camCode,
                                                                     startDate: component.startDate,
                                                                     endDate: component.endDate
                                                                 }))
@@ -247,7 +247,7 @@ function FlexVodna() {
                                             style={{borderBottom: '2px solid green', borderTop: '2px solid green'}}>
                                             <Td><b>{component.matNum}</b></Td>
                                             <Td>{component.matNumDesc}</Td>
-                                            <Td>{component.famCode}</Td>
+                                            <Td>{component.camCode}</Td>
                                             <Td><b>{component.startDate}</b></Td>
                                             <Td><b>{component.endDate}</b></Td>
                                         </Tr>
