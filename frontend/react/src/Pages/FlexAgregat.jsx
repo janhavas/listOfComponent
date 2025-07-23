@@ -20,7 +20,6 @@ import {
     Tr
 } from "@chakra-ui/react";
 import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
-git -v
 
 function FlexAgregat() {
 
