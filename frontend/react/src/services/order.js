@@ -19,3 +19,17 @@ export const getAllOrdersFromCodCell = async () => {
     }
 
 }
+
+export const getAllFilteredOrdersWithCompo = async (orders, workstation) => {
+
+    try {
+        const requestData = {
+            orders: orders,
+            wksId: workstation.wksId
+        };
+
+        return await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/get-orders-with-components/drawerfilter`, requestData);
+    } catch (e) {
+        throw e;
+    }
+}

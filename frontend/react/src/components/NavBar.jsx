@@ -16,6 +16,7 @@ import {
     Stack, Image,
 } from '@chakra-ui/react'
 import {Link} from "react-router-dom";
+import FilterDrawer from "./FilterDrawer.jsx";
 
 
 
@@ -46,7 +47,7 @@ const NavLink = ({to, children, onClick}) => {
 
 
 
-export default function NavBar({todayRoute,  fetchOrdersWithCompo, fetchOrdersWithCompoCodNext,handlePrintSelect, handlePrintAll}) {
+export default function NavBar({ todayRoute,  fetchOrdersWithCompo, fetchOrdersWithCompoCodNext,handlePrintSelect, handlePrintAll, fetchFilteredOrdersWithCompo }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -74,6 +75,10 @@ export default function NavBar({todayRoute,  fetchOrdersWithCompo, fetchOrdersWi
                             <NavLink onClick={handlePrintAll} >
                                  Tlač všetky
                             </NavLink>
+
+                        <FilterDrawer
+                            fetchFilteredOrdersWithCompo={fetchFilteredOrdersWithCompo}
+                        ></FilterDrawer>
 
                         </HStack>
                     </HStack>

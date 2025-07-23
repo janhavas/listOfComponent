@@ -12,7 +12,7 @@ public class ProdOrderRowMapper implements RowMapper<ProdOrder> {
     public ProdOrder mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new ProdOrder(
                 rs.getString("LinSeq").substring(0,2),
-                rs.getString("OrdNum"),
+                rs.getString("OrdNum").substring(1),
                 rs.getString("FGNum"),
                 rs.getString("AltBOM"),
                 rs.getString("IndFGNum"),

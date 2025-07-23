@@ -1,6 +1,7 @@
 package com.beko.component_list;
 
 import com.beko.component_list.prodorders.OrderWithComponent;
+import com.beko.component_list.prodorders.OrderWithComponentFilterRequestDTO;
 import com.beko.component_list.prodorders.OrderWithComponentRequestDTO;
 import com.beko.component_list.prodorders.OrderWithComponentRespondDTO;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,10 @@ public class ApplicationController {
         return applicationServices.selectAllOrdersWithComponentsByLineAndFamCodes(userRequest);
     }
 
+    @PostMapping("/drawerfilter")
+    public List<OrderWithComponentRespondDTO> getAllOrdersWithComponentByFilter(@RequestBody OrderWithComponentFilterRequestDTO userRequest){
+        return applicationServices.selectAllOrdersWithComponentsByFilter(userRequest);
+    }
 
 
 }

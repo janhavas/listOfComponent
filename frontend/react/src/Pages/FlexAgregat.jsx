@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar.jsx";
 import React, {useEffect, useRef, useState} from "react";
-import {getAllOrdersWithCompo} from "../services/order.js";
+import {getAllFilteredOrdersWithCompo, getAllOrdersWithCompo} from "../services/order.js";
 import {useReactToPrint} from "react-to-print";
 import {
     Checkbox,
@@ -20,7 +20,7 @@ import {
     Tr
 } from "@chakra-ui/react";
 import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
-
+git -v
 
 function FlexAgregat() {
 
@@ -66,7 +66,19 @@ function FlexAgregat() {
             setLoading(false)
         })
     }
+    const fetchFilteredOrdersWithCompo = (filteredOrders) => {
+        setLoading(true);
+        getAllFilteredOrdersWithCompo(filteredOrders, workstation).then(res => {
+            setOrderscompo(res.data)
+            console.log("Default data: " + JSON.stringify(res))
 
+        }).catch(err => {
+            console.log(err)
+        }).finally(() => {
+
+            setLoading(false)
+        })
+    }
 
     const handlePrintSelect = useReactToPrint({
         content: () => componentRef.current,
@@ -97,7 +109,7 @@ function FlexAgregat() {
         return (
             <>
                 <NavBar todayRoute={"/flexagregat"} fetchOrdersWithCompo={fetchOrdersWithCompo}
-                        fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}/>
+                        fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext} fetchFilteredOrdersWithCompo={fetchFilteredOrdersWithCompo}/>
                 <SimpleGrid
                     display={"flex"}
                     justifyContent={"center"}
@@ -120,7 +132,7 @@ function FlexAgregat() {
         return (
             <>
                 <NavBar todayRoute={"/flexagregat"} fetchOrdersWithCompo={fetchOrdersWithCompo}
-                        fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}/>
+                        fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext} fetchFilteredOrdersWithCompo={fetchFilteredOrdersWithCompo}/>
                 <SimpleGrid>
                     <Text fontSize='2xl'>No Orders</Text>
                 </SimpleGrid>
@@ -139,6 +151,7 @@ function FlexAgregat() {
                     fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}
                     handlePrintSelect={handlePrintSelect}
                     handlePrintAll={handlePrintAll}
+                    fetchFilteredOrdersWithCompo={fetchFilteredOrdersWithCompo}
             />
             <Flex alignItems="center" justifyContent="center">
                 <Heading lineHeight='tall'>
