@@ -1,7 +1,4 @@
-import NavBar from "../components/NavBar.jsx";
-import React, {useEffect, useRef, useState} from "react";
-import {getAllFilteredOrdersWithCompo, getAllOrdersWithCompo} from "../services/order.js";
-import {useReactToPrint} from "react-to-print";
+import React, {useEffect, useRef, useState} from 'react';
 import {
     Checkbox,
     Flex,
@@ -19,16 +16,20 @@ import {
     Thead,
     Tr
 } from "@chakra-ui/react";
+import {getAllFilteredOrdersWithCompo, getAllOrdersWithCompo} from "../services/order.js";
+import {useReactToPrint} from "react-to-print";
+import NavBar from "../components/NavBar.jsx";
 import GeneratePrintTable from "../components/GeneratePrintTable.jsx";
 
-function FlexAgregat() {
+
+function MMCodSkrina() {
 
     const [orderscompo, setOrderscompo] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedRows, setSelectedRows] = useState([]);
     const componentRef = useRef();
     const componentRefAll = useRef();
-    const workstation = {wksId: '0201'};
+    const workstation = {wksId: '0102'};
 
     const marginTop = "10px"
     const marginRight = "5px"
@@ -65,6 +66,7 @@ function FlexAgregat() {
             setLoading(false)
         })
     }
+
     const fetchFilteredOrdersWithCompo = (filteredOrders) => {
         setLoading(true);
         getAllFilteredOrdersWithCompo(filteredOrders, workstation).then(res => {
@@ -107,7 +109,7 @@ function FlexAgregat() {
     if (loading) {
         return (
             <>
-                <NavBar todayRoute={"/flexagregat"} fetchOrdersWithCompo={fetchOrdersWithCompo}
+                <NavBar todayRoute={"/codskrina"} fetchOrdersWithCompo={fetchOrdersWithCompo}
                         fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext} fetchFilteredOrdersWithCompo={fetchFilteredOrdersWithCompo}/>
                 <SimpleGrid
                     display={"flex"}
@@ -130,7 +132,7 @@ function FlexAgregat() {
     if (orderscompo.length <= 0) {
         return (
             <>
-                <NavBar todayRoute={"/flexagregat"} fetchOrdersWithCompo={fetchOrdersWithCompo}
+                <NavBar todayRoute={"/codskrina"} fetchOrdersWithCompo={fetchOrdersWithCompo}
                         fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext} fetchFilteredOrdersWithCompo={fetchFilteredOrdersWithCompo}/>
                 <SimpleGrid>
                     <Text fontSize='2xl'>No Orders</Text>
@@ -145,7 +147,7 @@ function FlexAgregat() {
             <div style={{display: "none"}}>
                 <GeneratePrintTable selectedOrders={selectedRows} ref={componentRef}/>
             </div>
-            <NavBar todayRoute={"/flexagregat"}
+            <NavBar todayRoute={"/codskrina"}
                     fetchOrdersWithCompo={fetchOrdersWithCompo}
                     fetchOrdersWithCompoCodNext={fetchOrdersWithCompoCodNext}
                     handlePrintSelect={handlePrintSelect}
@@ -155,11 +157,11 @@ function FlexAgregat() {
             <Flex alignItems="center" justifyContent="center">
                 <Heading lineHeight='tall'>
                     <Highlight
-                        query={['FLEX', 'Agregát']}
+                        query={['COD', 'Skriňa']}
                         styles={{px: '2', py: '1', rounded: 'full', bg: 'green.100'}}
                     >
-                        Montážna linka: FLEX
-                        Pracovisko: Agregát
+                        Montážna linka: COD
+                        Pracovisko: MM Skriňa
                     </Highlight>
                 </Heading>
             </Flex>
@@ -276,7 +278,6 @@ function FlexAgregat() {
 
         </>
     )
-
 }
 
-export default FlexAgregat
+export default MMCodSkrina

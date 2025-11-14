@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -21,5 +22,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
         allowedOrigins.forEach(corsRegistration::allowedOrigins);
         allowedMethods.forEach(corsRegistration::allowedMethods);
 
+    }
+    // Dôležité pre React Router – fallback na index.html
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+
+        // zachytí všetky URL typu /xyz
+        registry.addViewController("/{spring:\\w+}")
+                .setViewName("forward:/index.html");
+
+        // zachytí /xyz/abc
+        registry.addViewController("/**/{spring:\\w+}")
+                .setViewName("forward:/index.html");
+
+        // zachytí /xyz/abc/def, ignoruje súbory ako .js, .css, .png
+        registry.addViewController("/{spring:\\w+}/**{spring:?!(\\.js|\\.css|\\.png|\\.jpg|\\.jpeg|\\.svg)$}")
+                .setViewName("forward:/index.html");
     }
 }

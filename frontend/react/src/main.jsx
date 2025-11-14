@@ -15,6 +15,7 @@ import FlexVodna from "./Pages/FlexVodna.jsx";
 import FlexAgregat from "./Pages/FlexAgregat.jsx";
 import CodVodna from "./Pages/CodVodna.jsx";
 import CodAgregat from "./Pages/CodAgregat.jsx";
+import MMCodSkrina from "./Pages/MMCodSkrina.jsx";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
     {
         path: "/flexvodna",
         element: <FlexVodna/>,
+    },
+    {
+        path: "/mmcodskrina",
+        element: <MMCodSkrina/>,
     },
 ]);
 

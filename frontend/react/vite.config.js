@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react()],
   build:{
     outDir: "../../backend/src/main/resources/static"
-  }
+  },
+    server: {
+        historyApiFallback: true
+    },
+    preview: {
+        historyApiFallback: true
+    }
 })
